@@ -28,12 +28,16 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
+      - name: Run a one-line script
+        run: echo Hello, world!
+      - name: Run check files
+        run: dir
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore ConsoleApp1 --verbosity Detailed
       - name: Build
-        run: dotnet build
+        run: dotnet build ConsoleApp1
       - name: Test with the dotnet CLI
-        run: dotnet test
+        run: dotnet test TestProject1
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
