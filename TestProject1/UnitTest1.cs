@@ -1,3 +1,5 @@
+using ConsoleApp1;
+
 namespace TestProject1
 {
     public class Tests
@@ -10,7 +12,9 @@ namespace TestProject1
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            var calcultor = new Calculator();
+
+            Assert.AreEqual(4, calcultor.Add(2, 3));
         }
     }
 }
