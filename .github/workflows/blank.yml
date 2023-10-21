@@ -28,6 +28,10 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
+      - name: Run a one-line script
+        run: echo Hello, world!
+      - name: Run check files
+        run: dir
       - name: Install dependencies
         run: dotnet restore --verbosity Detailed
       - name: Build
