@@ -41,12 +41,7 @@ jobs:
            name: app build
            path: ConsoleApp1/bin/Debug/net6.0
   tests:
-     needs: build
-     runs-on: ${{ matrix.os }}
-
-     strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+     runs-on: windows-latest
         
      steps:
       - name: Checkout Repository
@@ -62,5 +57,15 @@ jobs:
           dotnet-version: '6.0.x'
       - name: Test with the dotnet CLI
         run: dotnet test TestProject1
+  run-console-app:
+    runs-on: windows-latest
+    needs: [build,tests]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Run Console App
+        run: dotnet run ConsoleApp1
 
  
