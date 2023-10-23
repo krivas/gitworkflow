@@ -75,6 +75,6 @@ jobs:
 
       - name: Run Console App
         run: |
-          dotnet run --project ${{ github.workspace }}/app build
+          dotnet run --project ConsoleApp1/bin/Debug/net6.0/MyConsoleApp1.csproj
 
  
