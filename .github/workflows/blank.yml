@@ -36,10 +36,7 @@ jobs:
         run: dotnet restore ConsoleApp1
       - name: Build
         run: dotnet build ConsoleApp1
-      - uses: actions/upload-artifact@main
-        with:
-           name: app build
-           path: ConsoleApp1/bin/Debug/net6.0
+    
   tests:
      runs-on: windows-latest
         
@@ -65,7 +62,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: app build
+
+      - name: List Artifact Contents
+        run: |
+          ls -R ${{ github.workspace }}/app build
+
       - name: Run Console App
-        run: dotnet run ConsoleApp1
+        run: |
+          dotnet run --project ${{ github.workspace }}/app build/ConsoleApp1/bin/Debug/net6.0/ConsoleApp1.dll
 
  
