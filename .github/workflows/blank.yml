@@ -36,11 +36,20 @@ jobs:
         run: dotnet restore ConsoleApp1
       - name: Build
         run: dotnet build ConsoleApp1
+      - uses: actions/upload-artifact@main 
+        with:
+           name: app build
+           path: public /
   tests:
+     needs: build
      runs-on: windows-latest
      steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+      - uses: actions/download-artifact@main 
+        with:
+           name: app build
+           path: public
       
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
