@@ -1,0 +1,6 @@
+{
+  length:10,
+  forbidden:["!","@"],
+  allow:["a","b","c","d"]
+
+}
