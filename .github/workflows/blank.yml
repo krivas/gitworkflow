@@ -36,25 +36,18 @@ jobs:
         run: dotnet restore ConsoleApp1
       - name: Build
         run: dotnet build ConsoleApp1
-      - uses: actions/upload-artifact@main
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
         with:
-           name: app build
-           path: ConsoleApp1/bin/Debug/net6.0
+          name: app build
+          path: ConsoleApp1/
+    
   tests:
-     needs: build
-     runs-on: ${{ matrix.os }}
-
-     strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+     runs-on: windows-latest
         
      steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - uses: actions/download-artifact@main
-        with:
-           name: app build
-           path: ConsoleApp1/bin/Debug/net6.0
       
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
@@ -62,5 +55,26 @@ jobs:
           dotnet-version: '6.0.x'
       - name: Test with the dotnet CLI
         run: dotnet test TestProject1
+  run-console-app:
+    runs-on: windows-latest
+    needs: [build,tests]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Download Artifact
+        uses: actions/download-artifact@main
+        with:
+          name: app build
+          path: ConsoleApp1
+
+      - name: List Artifact Contents
+        run: |
+          ls -R ${{ github.workspace }}/app build
+
+      - name: Run Console App
+        run: |
+          dotnet run --project app build
 
  
