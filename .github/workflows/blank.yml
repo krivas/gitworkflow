@@ -19,7 +19,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-
+   
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -42,7 +42,12 @@ jobs:
            path: ConsoleApp1/bin/Debug/net6.0
   tests:
      needs: build
-     runs-on: windows-latest
+     runs-on: ${{ matrix.os }}
+
+     strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        
      steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
