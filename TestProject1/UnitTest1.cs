@@ -15,6 +15,8 @@ namespace TestProject1
             var calcultor = new Calculator();
 
             Assert.AreEqual(5, calcultor.Add(2, 3));
+
+
         }
     }
 }
