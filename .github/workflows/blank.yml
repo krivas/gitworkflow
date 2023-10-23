@@ -42,7 +42,7 @@ jobs:
            path: ConsoleApp1/bin/Debug/net6.0
   tests:
      needs: build
-     runs-on: ${{ matrix.os }}
+     runs-on: windows-latest
 
      strategy:
       matrix:
